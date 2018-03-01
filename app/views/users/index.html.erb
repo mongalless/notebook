@@ -1,0 +1,113 @@
+<div class="container-fluid">
+  	<h1 align="center">Notebook</h1>
+    <div class="panel panel-default panel-table">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col col-xs-6">
+                    <h3>Contacts</h3>
+                </div>
+                <div class="col col-xs-6 text-right">
+                    <%= link_to 'Add new contact', new_user_path, class: 'btn btn-primary btn-create' %>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped table-bordered table-list">
+                <thead>
+                    <tr>
+                        <th>
+                            <%= sortable "name_surname", "Name Surname" %>
+                        </th>
+                        <th>
+                            <%= sortable "phone_number", "Phone Number" %>
+                        </th>
+                        <th>
+                            <%= sortable "birthday_date", "Birthday date" %>
+                        </th>
+                        <th>
+                            <%= sortable "email", "Email" %>
+                        </th>
+                        <th>
+                            <%= sortable "facebook_link", "Facebook" %>
+                        </th>
+                        <th><em class="fa fa-cog"></em></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @users.each do |user| %>
+                        <tr>
+                            <td>
+                                <a href="#user_<%= user.id %>" data-toggle="modal" data-target="#user_<%= user.id %>">
+                                    <%= user.name_surname %>
+                                </a>
+                            </td>
+                            <td>
+                                <%= user.phone_number %>
+                            </td>
+                            <td>
+                                <%= user.birthday_date %>
+                            </td>
+                            <td>
+                                <%= user.email %>
+                            </td>
+                            <td>
+                                <%= user.facebook_link %>
+                            </td>
+                            <td align="center">
+                                <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %>
+                            </td>
+                        </tr>
+
+                        <div class="modal fade" id="user_<%= user.id %>" tabindex="-1" role="dialog" aria-labelledby="user_<%= user.id %>_label" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="user-<%= user.id %>-label">
+                                            <%= user.name_surname %>
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Photo link:
+                                        <%= user.photo_link %>
+                                    </div>
+                                    <div class="modal-body">
+                                        Phone number:
+                                        <%= user.phone_number %>
+                                    </div>
+                                    <div class="modal-body">
+                                        Country:
+                                        <%= user.country_name %>
+                                    </div>
+                                    <div class="modal-body">
+                                        Town:
+                                        <%= user.town_name %>
+                                    </div>
+                                    <div class="modal-body">
+                                        Birthday date:
+                                        <%= user.birthday_date %>
+                                    </div>
+                                    <div class="modal-body">
+                                        Email:
+                                        <%= user.email %>
+                                    </div>
+                                    <div class="modal-body">
+                                        Facebook:
+                                        <%= user.facebook_link %>
+                                    </div>
+                                    <div class="modal-body">
+                                        Other social link:
+                                        <%= user.other_social_links %>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
